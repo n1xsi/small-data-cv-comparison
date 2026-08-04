@@ -1,0 +1,42 @@
+# Datasets and derived artifacts
+data/
+*.zip
+
+# Model weights
+*.pt
+*.pth
+*.keras
+*.h5
+*.joblib
+*.onnx
+
+# Training run outputs
+runs/
+outputs/
+third_party/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.env
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Notebook outputs are stripped before commit
+notebooks/.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
