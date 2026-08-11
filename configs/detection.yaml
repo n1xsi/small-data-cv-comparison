@@ -1,0 +1,42 @@
+# Part 2: detection experiments
+# Paths are relative to the repository root
+
+# COCO export from Label Studio, plus the images it references
+coco_json: data/raw/annotations/result.json
+images_root: data/raw/images
+
+# Generated splits: COCO for D-FINE, YOLO text labels for Ultralytics
+coco_out_root: data/dataset_coco
+yolo_out_root: data/dataset_yolo
+
+# Unlabelled images used for qualitative inference only
+new_images_dir: data/new_images
+
+runs_root: runs
+output_dir: results/detection
+
+train_size: 0.70
+val_size: 0.15
+test_size: 0.15
+seed: 42
+
+# A *.yaml spec builds the architecture from scratch; a .pt file would load
+# pretrained COCO weights and invalidate the from-scratch comparison
+yolo_model: yolov8n.yaml
+yolo_pretrained: false
+yolo_epochs: 80
+yolo_image_size: 640
+yolo_batch: 16
+
+dfine_size: n
+dfine_epochs: 80
+dfine_image_size: 640
+dfine_train_batch: 8
+dfine_val_batch: 8
+dfine_num_workers: 2
+# Kept false so both detectors start from random initialisation
+dfine_backbone_pretrained: false
+dfine_use_amp: true
+dfine_repo_dir: third_party/D-FINE
+
+conf_threshold: 0.40

@@ -1,0 +1,33 @@
+# Part 1: classification experiments
+# Paths are relative to the repository root
+
+dataset_root: data/raw/cats_dogs
+output_dir: results/classification
+
+# Subdirectory names inside dataset_root. Leave null to infer from the folders
+class_names: [cat, dog]
+
+# Cap per class so the classical baselines stay tractable on CPU
+max_images_per_class: 1000
+
+# Classical pipelines (raw pixels, HOG) work on small grayscale images;
+# the CNN and MobileNetV2 need larger RGB input
+classical_image_size: [64, 64]
+dl_image_size: [160, 160]
+
+train_size: 0.70
+val_size: 0.15
+test_size: 0.15
+
+seed: 42
+batch_size: 32
+
+cnn_epochs: 15
+tl_head_epochs: 5
+tl_fine_tune_epochs: 5
+
+# MobileNetV2 layer index from which weights are unfrozen for fine-tuning
+fine_tune_at: 100
+
+use_class_weights: true
+primary_metric: f1_macro
