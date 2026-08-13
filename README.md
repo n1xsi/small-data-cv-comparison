@@ -12,3 +12,9 @@
     - Утверждение о доминировании пропусков над ошибками классификации не имело подсчётов
   - Записал реальные метрики в results/*/metrics.csv
   - Выбрал 26 репрезентативных фигур из 89
+
+## 🗂️ Dataset
+Kaggle: https://www.kaggle.com/datasets/shaunthesheep/microsoft-catsvsdogs-dataset/data
+
+## 🙏 Special thanks
+* [@oodwyn](https://github.com/oodwyn) & @emvoron — разметка данных в [![Label Studio](https://custom-icon-badges.demolab.com/badge/label%20studio-white?style=for-the-badge&logo=labelstudio)](#)
