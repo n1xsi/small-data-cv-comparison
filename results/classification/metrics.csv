@@ -1,0 +1,9 @@
+model,split,accuracy,f1_macro,f1_weighted,roc_auc,average_precision
+Raw pixels + LogisticRegression,val,0.523333,0.521798,0.521798,0.500044,0.486959
+HOG + LinearSVC,val,0.563333,0.563328,0.563328,0.650533,0.636995
+CNN from scratch,val,0.666667,0.665939,0.665939,0.699511,0.670887
+MobileNetV2 transfer learning,val,0.986667,0.986664,0.986664,0.999867,0.999867
+Raw pixels + LogisticRegression,test,0.490000,0.489313,0.489313,0.506222,0.497040
+HOG + LinearSVC,test,0.606667,0.606509,0.606509,0.645867,0.625956
+CNN from scratch,test,0.566667,0.565101,0.565101,0.625600,0.669234
+MobileNetV2 transfer learning,test,0.983333,0.983333,0.983333,0.998800,0.998782
