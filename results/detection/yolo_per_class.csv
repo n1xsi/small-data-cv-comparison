@@ -1,0 +1,7 @@
+model,split,class,images,instances,precision,recall,mAP50,mAP50_95
+YOLOv8n (scratch),val,all,60,72,0.446,0.555,0.480,0.303
+YOLOv8n (scratch),val,cat,30,37,0.405,0.459,0.444,0.264
+YOLOv8n (scratch),val,dog,30,35,0.486,0.650,0.517,0.342
+YOLOv8n (scratch),test,all,61,68,0.453,0.679,0.480,0.259
+YOLOv8n (scratch),test,cat,31,37,0.470,0.649,0.453,0.240
+YOLOv8n (scratch),test,dog,30,31,0.437,0.710,0.507,0.278

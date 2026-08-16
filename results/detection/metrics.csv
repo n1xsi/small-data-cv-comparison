@@ -1,0 +1,4 @@
+model,split,mAP50_95,mAP50,mAP75,precision,recall
+YOLOv8n (scratch),val,0.303312,0.480476,,0.445718,0.554512
+YOLOv8n (scratch),test,0.258718,0.479940,,0.453238,0.679163
+D-FINE-n (scratch),val,0.114,0.251,0.076,,
