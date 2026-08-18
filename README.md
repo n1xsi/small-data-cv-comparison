@@ -264,15 +264,11 @@ COCO-scale data and a bad one with 280 images.
 │   ├── prepare_detection.py
 │   ├── train_detector.py
 │   └── predict.py
-├── notebooks/                  # narrative walkthroughs, importing from src/
 ├── configs/                    # classification.yaml, detection.yaml
 ├── tests/                      # pytest suite, no GPU or heavy frameworks needed
 ├── docs/                       # methodology.md, results.md
 └── data/                       # not committed — see data/README.md
 ```
-
-Notebooks import from `src/cvlab` rather than redefining logic, so a fix lands in
-one place and the notebook narrative stays readable.
 
 ## Development
 
@@ -282,20 +278,12 @@ pip install -e ".[dev]"
 pytest -q                                   # 70 tests
 ruff check src scripts tests
 ruff format src scripts tests
-python tests/check_notebooks_clean.py       # fails on committed notebook outputs
 ```
 
 The test suite deliberately avoids TensorFlow and PyTorch. It covers bbox
 geometry, COCO auditing, dataset splitting, the error taxonomy and config
 validation — the code where a bug produces plausible-looking wrong numbers instead
 of an exception. CI runs the same commands on Python 3.11.
-
-Install [nbstripout](https://github.com/kynan/nbstripout) before committing
-notebooks:
-
-```bash
-pip install nbstripout && nbstripout --install
-```
 
 ## Reproducing the detection experiments
 

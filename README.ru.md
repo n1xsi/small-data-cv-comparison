@@ -268,15 +268,11 @@ mAP50-95 0.114 на валидации против 0.303 у YOLOv8n на той
 │   ├── prepare_detection.py
 │   ├── train_detector.py
 │   └── predict.py
-├── notebooks/                  # разборы с повествованием, импортируют из src/
 ├── configs/                    # classification.yaml, detection.yaml
 ├── tests/                      # набор pytest, не требует GPU и тяжёлых фреймворков
 ├── docs/                       # methodology.md, results.md
 └── data/                       # не коммитится — см. data/README.md
 ```
-
-Ноутбуки импортируют из `src/cvlab`, а не переопределяют логику, так что
-исправление попадает в одно место, а повествование в ноутбуке остаётся читаемым.
 
 ## Разработка
 
@@ -286,20 +282,12 @@ pip install -e ".[dev]"
 pytest -q                                   # 70 тестов
 ruff check src scripts tests
 ruff format src scripts tests
-python tests/check_notebooks_clean.py       # падает, если в ноутбуках остались выводы
 ```
 
 Набор тестов намеренно обходится без TensorFlow и PyTorch. Он покрывает геометрию
 рамок, проверку COCO, разбиение датасета, таксономию ошибок и валидацию конфигов —
 код, где баг выдаёт правдоподобно выглядящие неверные числа вместо исключения. CI
 запускает те же команды на Python 3.11.
-
-Перед коммитом ноутбуков установите
-[nbstripout](https://github.com/kynan/nbstripout):
-
-```bash
-pip install nbstripout && nbstripout --install
-```
 
 ## Воспроизведение экспериментов с детекцией
 

@@ -30,10 +30,6 @@ venv/
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
-.ipynb_checkpoints/
-
-# Notebook outputs are stripped before commit
-notebooks/.ipynb_checkpoints/
 
 # OS / editor
 .DS_Store

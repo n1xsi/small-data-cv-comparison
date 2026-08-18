@@ -35,6 +35,3 @@ jobs:
 
       - name: Run tests
         run: pytest -q
-
-      - name: Verify notebooks have no stored outputs
-        run: python tests/check_notebooks_clean.py
