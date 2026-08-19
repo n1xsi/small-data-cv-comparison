@@ -24,7 +24,16 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from cvlab.common import ensure_dir, load_detection_config, save_table, set_seeds  # noqa: E402
+import pandas as pd  # noqa: E402
+
+from cvlab.common import (  # noqa: E402
+    ensure_dir,
+    load_detection_config,
+    read_json,
+    save_table,
+    set_seeds,
+    use_headless_backend,
+)
 from cvlab.detection import (  # noqa: E402
     DetectorResult,
     comparison_table,
@@ -134,8 +143,6 @@ def run_dfine_experiment(
     image_size = args.image_size or config.dfine_image_size
 
     # D-FINE reserves class index 0 for background, so num_classes is (number of real classes + 1)
-    from cvlab.common import read_json
-
     categories = read_json(annotations_dir / "train.json").get("categories", [])
     num_classes = max(int(c["id"]) for c in categories) + 1 if categories else 3
     print(f"Categories: {[c['name'] for c in categories]} -> num_classes={num_classes}")
@@ -242,8 +249,6 @@ def main() -> int:
     output_dir = ensure_dir(config.output_dir)
     figures_dir = None
     if not args.no_figures:
-        from cvlab.common import use_headless_backend
-
         figures_dir = ensure_dir(output_dir / "figures")
         use_headless_backend()
 
@@ -265,8 +270,6 @@ def main() -> int:
     print(f"\nMetrics written to {metrics_path}")
 
     # Merge with any other detector's results so the comparison chart covers both
-    import pandas as pd
-
     all_tables = [pd.read_csv(path) for path in sorted(output_dir.glob("metrics_*.csv"))]
     if figures_dir is not None and len(all_tables) > 1:
         combined = pd.concat(all_tables, ignore_index=True)

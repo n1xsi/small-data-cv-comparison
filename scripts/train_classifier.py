@@ -28,16 +28,25 @@ import pandas as pd  # noqa: E402
 from cvlab.classification import (  # noqa: E402
     build_dataset_dataframe,
     build_hog_svm_grid,
+    build_mobilenetv2_transfer,
     build_pixel_baseline,
+    build_small_cnn,
+    compile_model,
+    early_stopping,
+    evaluate_keras_model,
     evaluate_sklearn_model,
     extract_hog_features,
     flatten_pixels,
     load_images_as_arrays,
+    make_tf_dataset,
     plot_confusion_matrix,
+    plot_gradcam_examples,
+    plot_history,
     plot_model_comparison,
     plot_roc_and_pr,
     split_dataset,
     summarize,
+    unfreeze_top_layers,
 )
 from cvlab.common import (  # noqa: E402
     ensure_dir,
@@ -151,18 +160,6 @@ def train_classical(name: str, splits, config, figures_dir: Path | None) -> list
 
 def train_deep(name: str, splits, config, figures_dir: Path | None) -> list:
     """Train either the from-scratch CNN or the MobileNetV2 transfer model."""
-    from cvlab.classification import (
-        build_mobilenetv2_transfer,
-        build_small_cnn,
-        compile_model,
-        early_stopping,
-        evaluate_keras_model,
-        make_tf_dataset,
-        plot_gradcam_examples,
-        plot_history,
-        unfreeze_top_layers,
-    )
-
     print(f"\n=== {name} ===")
     image_size = config.dl_image_size
     input_shape = (*image_size, 3)

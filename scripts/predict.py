@@ -16,6 +16,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 
 from cvlab.common import (  # noqa: E402
@@ -67,7 +68,6 @@ def collect_sources(source: Path) -> list[Path]:
 
 
 def run_classification(args: argparse.Namespace, output_dir: Path) -> pd.DataFrame:
-    import numpy as np
     from tensorflow import keras
 
     from cvlab.classification.explain import load_image_array
