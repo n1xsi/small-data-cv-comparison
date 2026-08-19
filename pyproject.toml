@@ -25,7 +25,7 @@ dependencies = [
 [project.optional-dependencies]
 classification = ["tensorflow>=2.15"]
 detection = ["torch>=2.1", "torchvision>=0.16", "ultralytics>=8.1", "pycocotools>=2.0.7"]
-dev = ["ruff>=0.4", "pytest>=7.4", "nbstripout>=0.6"]
+dev = ["ruff>=0.4", "pytest>=7.4"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -36,8 +36,20 @@ target-version = "py310"
 src = ["src", "scripts", "tests"]
 
 [tool.ruff.lint]
-select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "PLC0415"]
 ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+# PLC0415 (import outside top-level) is deliberate here. The optional extras -
+# tensorflow, torch, ultralytics - are imported inside the functions that need
+# them, so importing cvlab and running the test suite work without them
+# installed. predict.py additionally defers its cvlab imports per --task, so a
+# detection run does not pay for scikit-learn and scikit-image.
+"scripts/predict.py" = ["PLC0415"]
+"src/cvlab/classification/explain.py" = ["PLC0415"]
+"src/cvlab/classification/models.py" = ["PLC0415"]
+"src/cvlab/common/seeding.py" = ["PLC0415"]
+"src/cvlab/detection/yolo.py" = ["PLC0415"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
