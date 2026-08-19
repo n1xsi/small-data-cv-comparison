@@ -1,5 +1,8 @@
 # Datasets and derived artifacts
-data/
+data/raw/
+data/dataset_coco/
+data/dataset_yolo/
+data/new_images/
 *.zip
 
 # Model weights
