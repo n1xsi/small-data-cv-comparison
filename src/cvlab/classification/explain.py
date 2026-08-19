@@ -6,6 +6,9 @@ predicted class with respect to those maps, producing a coarse heatmap of the
 evidence the network actually used. On this dataset it is the quickest way to
 check that a 98% model is looking at the animal and not at a background cue.
 
+TensorFlow is imported lazily inside `make_gradcam_heatmap`, so importing this
+module (and the test suite) does not require it installed.
+
 Reference: Selvaraju et al., "Grad-CAM: Visual Explanations from Deep Networks
 via Gradient-based Localization", ICCV 2017.
 """
@@ -15,7 +18,6 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
@@ -91,6 +93,8 @@ def make_gradcam_heatmap(
     Returns:
         The heatmap in [0, 1], the explained class index, and its confidence.
     """
+    import tensorflow as tf
+
     if layer_name is None:
         layer_name = find_last_conv_layer(model)
 

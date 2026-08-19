@@ -12,6 +12,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+from urllib.parse import unquote
 
 import numpy as np
 import pandas as pd
@@ -118,8 +119,6 @@ def build_image_index(images_root: str | Path) -> dict[str, Path]:
 
 def resolve_image_path(file_name: str, index: dict[str, Path]) -> Path | None:
     """Map a COCO `file_name` onto a real file, tolerating LS-style prefixes."""
-    from urllib.parse import unquote
-
     candidate = Path(unquote(file_name)).name
     if candidate in index:
         return index[candidate]

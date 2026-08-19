@@ -160,9 +160,9 @@ def summarize(results: list[EvalResult], *, sort_by: str = "f1_macro") -> pd.Dat
     """Combine results into a table sorted by the primary metric."""
     frame = pd.DataFrame([r.as_row() for r in results])
     if sort_by in frame.columns:
-        frame = frame.sort_values(
-by=sort_by, ascending=False).reset_index(drop=True)
+        frame = frame.sort_values(by=sort_by, ascending=False).reset_index(drop=True)
     return frame
+
 
 # --------------------------------- Plots ---------------------------------
 
@@ -175,8 +175,7 @@ def plot_confusion_matrix(
     save_path: Path | None = None,
 ) -> None:
     """Row-normalised confusion matrix, so per-class recall reads off the diagonal."""
-    matrix = confusion_matrix(
-        result.y_true, result.y_pred, normalize=normalize)
+    matrix = confusion_matrix(result.y_true, result.y_pred, normalize=normalize)
     display = ConfusionMatrixDisplay(matrix, display_labels=class_names)
     display.plot(cmap="Blues", colorbar=False, values_format=".2f")
     plt.title(f"{result.model_name} — {result.split_name}")
@@ -302,11 +301,9 @@ def show_misclassified(
 
         plt.title(f"true: {true_name}\npredicted: {pred_name}", fontsize=10)
         plt.axis("off")
-        rows.append({"file_path": row["file_path"],
-                    "true": true_name, "predicted": pred_name})
+        rows.append({"file_path": row["file_path"], "true": true_name, "predicted": pred_name})
 
-    plt.suptitle(
-        f"{result.model_name}: misclassified examples ({len(wrong)} total)")
+    plt.suptitle(f"{result.model_name}: misclassified examples ({len(wrong)} total)")
     save_or_show(save_path)
 
     return pd.DataFrame(rows)

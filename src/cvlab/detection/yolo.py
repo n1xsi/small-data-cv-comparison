@@ -11,9 +11,11 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+import matplotlib.pyplot as plt
 import pandas as pd
 
 from ..common.io import ensure_dir
+from ..common.viz import save_or_show
 
 
 def _load_ultralytics(model_spec: str) -> Any:
@@ -205,10 +207,6 @@ def plot_training_curves(
     save_path: Path | None = None,
 ) -> None:
     """Plot losses and validation mAP over epochs."""
-    import matplotlib.pyplot as plt
-
-    from ..common.viz import save_or_show
-
     frame = read_training_curves(results_csv)
 
     loss_columns = [c for c in frame.columns if "loss" in c and c.startswith("train")]

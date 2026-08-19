@@ -16,9 +16,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -107,6 +104,9 @@ def build_augmentation_layer(name: str = "data_augmentation") -> Any:
     Aggressive augmentation on ~1400 training images tends to hurt more than it
     helps, and vertical flips are not realistic for photographs of animals.
     """
+    from tensorflow import keras
+    from tensorflow.keras import layers
+
     return keras.Sequential(
         [
             layers.RandomFlip("horizontal"),
@@ -130,6 +130,8 @@ def make_tf_dataset(
     Evaluation splits are never shuffled, so predictions stay aligned with the
     label order of the source DataFrame.
     """
+    import tensorflow as tf
+
     paths = df["file_path"].astype(str).to_numpy()
     labels = df["label"].astype(np.int32).to_numpy()
 
@@ -164,6 +166,9 @@ def build_small_cnn(
     `GlobalAveragePooling2D` replaces a wide flatten-plus-dense head, which cuts
     parameter count sharply — the right trade-off when training data is scarce.
     """
+    from tensorflow import keras
+    from tensorflow.keras import layers
+
     if augmentation is None:
         augmentation = build_augmentation_layer()
 
@@ -193,6 +198,10 @@ def build_mobilenetv2_transfer(
     Returns both the full model and the backbone, since the fine-tuning stage
     needs a handle on the backbone to unfreeze its upper layers.
     """
+    import tensorflow as tf
+    from tensorflow import keras
+    from tensorflow.keras import layers
+
     if augmentation is None:
         augmentation = build_augmentation_layer()
 
@@ -218,6 +227,8 @@ def build_mobilenetv2_transfer(
 
 def compile_model(model: Any, *, learning_rate: float = 1e-3) -> Any:
     """Compile with Adam and sparse categorical cross-entropy."""
+    from tensorflow import keras
+
     model.compile(
         optimizer=keras.optimizers.Adam(learning_rate=learning_rate),
         loss="sparse_categorical_crossentropy",
@@ -240,6 +251,8 @@ def unfreeze_top_layers(backbone: Any, *, fine_tune_at: int = 100) -> Any:
 
 def early_stopping(*, patience: int = 3, monitor: str = "val_loss") -> Any:
     """Early stopping that restores the best weights seen."""
+    from tensorflow import keras
+
     return keras.callbacks.EarlyStopping(
         monitor=monitor,
         patience=patience,

@@ -13,12 +13,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from PIL import Image
 
-import pandas as pd
-import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+from PIL import Image
 
 from ..common.viz import save_or_show
 
