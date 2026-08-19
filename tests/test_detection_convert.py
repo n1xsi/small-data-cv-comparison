@@ -10,6 +10,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+import yaml
 
 from cvlab.detection import (
     audit_coco,
@@ -200,8 +201,6 @@ def test_yolo_dataset_layout_and_yaml(coco_dataset: tuple[Path, Path], tmp_path:
     dataset_yaml = build_yolo_dataset(audit, splits, output_root)
 
     assert dataset_yaml.exists()
-
-    import yaml
 
     spec = yaml.safe_load(dataset_yaml.read_text(encoding="utf-8"))
     assert spec["nc"] == 2
